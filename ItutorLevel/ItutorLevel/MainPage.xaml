@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ItutorLevel.MainPage">
+  <StackLayout>
+    <Image/>
+    <Label Text="Itutor Level Assessment"></Label>
+    <Label Text="Qual o seu nome:"/>
+    <Entry/>
+    <Label Text="Qual o seu e-mail:"/>
+    <Entry/>
+    <Label Text="Qual o seu telefone:"/>
+    <Entry/>
+    
+  </StackLayout>
+</ContentPage>
