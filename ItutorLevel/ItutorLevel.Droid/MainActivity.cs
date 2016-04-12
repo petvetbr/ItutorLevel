@@ -18,6 +18,7 @@ namespace ItutorLevel.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+            Config.ObterPegunta(0);
         }
     }
 }

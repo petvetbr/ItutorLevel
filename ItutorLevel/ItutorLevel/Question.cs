@@ -10,6 +10,23 @@ namespace ItutorLevel
 {
     public class Question:BindableObject
     {
+        int _numero;
+        public int Numero
+        {
+            get
+            {
+                return _numero;
+            }
+            set
+            {
+                if (_numero != value)
+                {
+                    _numero = value;
+                    OnPropertyChanged(nameof(Numero));
+                }
+            }
+        }
+
         string _text;
         public string Text
         {
@@ -76,8 +93,8 @@ namespace ItutorLevel
             }
         }
 
-        int _respostaMultipla;
-        public int RespostaMultiplaAlternativas
+        string _respostaMultipla;
+        public string RespostaMultiplaAlternativas
         {
             get
             {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace ItutorLevel
 {
@@ -23,18 +24,28 @@ namespace ItutorLevel
         {
             var ret = new Dictionary<int, Question>();
             var assembly = typeof(Config).GetTypeInfo().Assembly;
-            
-            Stream stream = assembly.GetManifestResourceStream("Perguntas.xml");
 
+            Stream stream = assembly.GetManifestResourceStream("ItutorLevel.Data.Perguntas.xml");
 
-            //List<Monkey> monkeys;
-            //using (var reader = new System.IO.StreamReader(stream))
-            //{
-            //    var serializer = new XmlSerializer(typeof(List<Monkey>));
-            //    monkeys = (List<Monkey>)serializer.Deserialize(reader);
-            //}
-            //var listView = new ListView();
-            //listView.ItemsSource = monkeys;
+            var xml = XDocument.Load(stream);
+
+            foreach (var p in xml.Root.Elements("Pergunta"))
+            {
+                int numero = int.Parse(p.Attribute("Numero").Value);
+                var text = p.Attribute("Texto").Value;
+                var tipo = (QuestionType)Enum.ToObject(typeof(QuestionType), int.Parse(p.Attribute("Tipo").Value));
+                var opcoes = p.Elements().Select(x => new KeyValuePair<string, string>(x.Attribute("Opcao").Value, x.Value));
+                var question = new Question()
+                {
+                    Numero = numero,
+                    Text = text,
+                    Tipo = tipo,
+                    ListaAlternativas = new System.Collections.ObjectModel.ObservableCollection<KeyValuePair<string, string>>(opcoes)
+                };
+                ret.Add(numero, question);
+
+            }
+           
             return ret;
         }
     }
